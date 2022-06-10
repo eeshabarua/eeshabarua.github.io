@@ -421,7 +421,7 @@ function saveSetting(setting, value) {
   window.localStorage.setItem(setting, JSON.stringify(value));
 }
 
-let bunny;
+let helmet;
 
 const renderer = new THREE.WebGLRenderer({ canvas });
 
@@ -455,8 +455,8 @@ scene.background = new THREE.Color("black");
 
 {
   const objLoader = new OBJLoader();
-  objLoader.load("assets/bunny.obj", (root) => {
-    bunny = root;
+  objLoader.load("assets/helmet.obj", (root) => {
+    helmet = root;
     scene.add(root);
   });
 }
@@ -479,7 +479,7 @@ async function render() {
     camera.updateProjectionMatrix();
   }
 
-  if (bunny != undefined) {
+  if (helmet != undefined) {
     if (angleType.value == "euler") {
       if (showCalibration) {
         // BNO055
@@ -489,7 +489,7 @@ async function render() {
           THREE.Math.degToRad(orientation[1]),
           "YZX"
         );
-        bunny.setRotationFromEuler(rotationEuler);
+        helmet.setRotationFromEuler(rotationEuler);
       } else {
         let rotationEuler = new THREE.Euler(
           THREE.Math.degToRad(orientation[2]),
@@ -497,7 +497,7 @@ async function render() {
           THREE.Math.degToRad(-orientation[1]),
           "YZX"
         );
-        bunny.setRotationFromEuler(rotationEuler);
+        helmet.setRotationFromEuler(rotationEuler);
       }
     } else {
       let rotationQuaternion = new THREE.Quaternion(
@@ -506,7 +506,7 @@ async function render() {
         -quaternion[2],
         quaternion[0]
       );
-      bunny.setRotationFromQuaternion(rotationQuaternion);
+      helmet.setRotationFromQuaternion(rotationQuaternion);
     }
   }
 
